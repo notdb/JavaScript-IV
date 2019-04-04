@@ -40,14 +40,21 @@ class Student extends Person {
         this.className = attributes.className;
         this.favSubjects = attributes.favSubjects;
     }
-    butts() {
-        
-    }
     listSubjects() {
-        let butts = this.favSubjects.forEach(function (currentItem) {
-            console.log(currentItem);
+        // Outputting a vanilla array looked ugly, small fix
+
+        // Initializes variable with assignment of 'one white space'
+        let dangerousVar = ' ';
+
+        // Takes each element of the array, assigns it a value of a string, comma, and some white space. Finally, adds it to dangerousVar
+        let butts = this.favSubjects.forEach(function(currentItem){
+           dangerousVar += `${currentItem}, `
         })
-        return `You are taking ${this.favSubjects}`
+
+        // Slices the two characters off of dangerousVar because the loop ends with 'currentItem, ', making the entire string look ugly
+        let newString = dangerousVar.slice(1, (dangerousVar.length-2));
+
+        return `You are taking ${newString}.`
     }
 
     PRAssignment(subject) {
@@ -93,7 +100,7 @@ const testStudent = new Student({
     catchPhrase: "what",
     previousBackground: "notStudent",
     className: "cs10000",
-    favSubjects: ['reading', ' books', ' more books', ' more reading']
+    favSubjects: ['reading', 'books', 'more books', 'more reading']
 })
 
 const testPR = new ProjectManager({
