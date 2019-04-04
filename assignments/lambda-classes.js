@@ -32,11 +32,17 @@ class Instructor extends Person {
         return `${student.name} receives a perfect score in ${subject}`;
     }
     addOrRemoveGrade(student) {
+        //repeat only if number is > 100
         if (Math.random() < .5) {
             student.grade += Math.round(Math.random() * 50);
-            
+            if (student.grade > 100) {
+                student.grade += Math.round(Math.random() * -50);
+            }
         } else {
             student.grade += Math.round(Math.random() * -50);
+            if (student.grade < 100) {
+                student.grade += Math.round(Math.random() * 50);
+            }
         }
     }
     
