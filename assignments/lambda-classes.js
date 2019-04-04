@@ -31,6 +31,23 @@ class Instructor extends Person {
     grade(student, subject) {
         return `${student.name} receives a perfect score in ${subject}`;
     }
+    addOrRemoveGrade(student) {
+        if (Math.random() < .5) {
+            student.grade += Math.round(Math.random() * 50);
+            
+        } else {
+            student.grade += Math.round(Math.random() * -50);
+        }
+    }
+    
+    graduate(student) {
+        let convertGrade = student.grade / 100;
+        if (convertGrade >= .7) {
+            return `${student.name} can graduate`
+        } else {
+            return `Go back to studying`
+        }
+    }
 }
 
 class Student extends Person {
@@ -39,19 +56,14 @@ class Student extends Person {
         this.previousBackground = attributes.previousBackground;
         this.className = attributes.className;
         this.favSubjects = attributes.favSubjects;
+        this.grade = attributes.grade;
     }
     listSubjects() {
         // Outputting a vanilla array looked ugly, small fix
-
-        // Initializes variable with assignment of 'one white space'
         let dangerousVar = ' ';
-
-        // Takes each element of the array, assigns it a value of a string, comma, and some white space. Finally, adds it to dangerousVar
         let butts = this.favSubjects.forEach(function(currentItem){
            dangerousVar += `${currentItem}, `
         })
-
-        // Slices the two characters off of dangerousVar because the loop ends with 'currentItem, ', making the entire string look ugly
         let newString = dangerousVar.slice(1, (dangerousVar.length-2));
 
         return `You are taking ${newString}.`
@@ -64,6 +76,8 @@ class Student extends Person {
     sprintChallenge(subject) {
         return `${this.name} has begun sprint challenge on ${subject}`
     }
+ 
+    
 }
 
 class ProjectManager extends Instructor {
@@ -100,7 +114,8 @@ const testStudent = new Student({
     catchPhrase: "what",
     previousBackground: "notStudent",
     className: "cs10000",
-    favSubjects: ['reading', 'books', 'more books', 'more reading']
+    favSubjects: ['reading', 'books', 'more books', 'more reading'],
+    grade: 40
 })
 
 const testPR = new ProjectManager({
